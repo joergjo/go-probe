@@ -1,0 +1,62 @@
+{{define "openai-form"}}
+<form hx-post="/openai" hx-swap="outerHTML" class="form-horizontal needs-validation"
+_="on htmx:beforeSend set #submitButton.disabled to 'disabled'">
+
+<!-- Text input-->
+<div class="mb-3">
+    <label class="form-label" for="endpoint">Endpoint</label>
+    <input type="text" class="form-control{{if index .ModelErrors "type"}}
+        input-validation-error{{end}}" id="endpoint" name="endpoint" placeholder="https://your-endpoint.openai.azure.com/" value="{{.Endpoint}}">
+    <div class="invalid-feedback">
+        <span id="endpoint-message">{{index .ModelErrors "endpoint"}}</span>
+    </div>
+</div>
+
+<!-- Text input-->
+<div class="mb-3">
+    <label class="form-label" for="key">API Key</label>
+    <input type="password" class="form-control{{if index .ModelErrors "key"}}
+        input-validation-error{{end}}" id="key" name="key" value="{{.Key}}">
+    <div class="invalid-feedback">
+        <span id="key-message">{{index .ModelErrors "key"}}</span>
+    </div>
+</div>
+
+<!-- Text input-->
+<div class="mb-3">
+    <label class="form-label" for="deployment">deployment</label>
+    <input type="text" class="form-control{{if index .ModelErrors "deployment"}}
+        input-validation-error{{end}}" id="deployment" name="deployment" placeholder="gpt-35-turbo-16k" value="{{.Deployment}}">
+    <div class="invalid-feedback">
+        <span id="deployment-message">{{index .ModelErrors "deployment"}}</span>
+    </div>
+</div>
+
+<!-- Text input-->
+<div class="mb-3">
+    <label class="form-label" for="prompt">Prompt</label>
+    <textarea class="form-control" id="prompt" name="prompt" placeholder="Enter your question..." rows="4">{{.Prompt}}</textarea>
+</div>
+
+
+<!-- Text input-->
+<div class="mb-3">
+    <label class="form-label" for="result">Response</label>
+    <textarea class="form-control" id="result" name="result" rows="10" readonly>{{.Result}}</textarea>
+</div>
+
+
+<!-- CSRF token -->
+{{.CsrfField}}
+
+<div class="control">
+    <button id="submitButton" type="submit" class="btn btn-primary">
+        <span class="htmx-indicator">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span class="visually-hidden">Loading...</span>
+        </span>
+        Ask
+    </button>
+</div>
+</form>
+{{end}}

@@ -1,0 +1,63 @@
+{{define "pg-form"}}
+<form hx-post="/postgres" hx-swap="outerHTML" class="form-horizontal needs-validation"
+_="on htmx:beforeSend set #submitButton.disabled to 'disabled'">
+
+<!-- Text input-->
+<div class="mb-3">
+    <label class="form-label" for="fqdn">FQDN</label>
+    <input type="text" class="form-control{{if index .ModelErrors "fqdn"}}
+        input-validation-error{{end}}" id="fqdn" name="fqdn" placeholder="server.dnszone.postgres.database.azure.com" value="{{.FQDN}}">
+    <div class="invalid-feedback">
+        <span id="fqdn-message">{{index .ModelErrors "fqdn"}}</span>
+    </div>
+</div>
+
+<!-- Text input-->
+<div class="mb-3">
+    <label class="form-label" for="login">Login</label>
+    <input type="text" class="form-control{{if index .ModelErrors "login"}}
+        input-validation-error{{end}}" id="login" name="login" placeholder="postgres" value="{{.Login}}">
+    <div class="invalid-feedback">
+        <span id="login-message">{{index .ModelErrors "login"}}</span>
+    </div>
+</div>
+
+<!-- Text input-->
+<div class="mb-3">
+    <label class="form-label" for="password">Password</label>
+    <input type="password" class="form-control{{if index .ModelErrors "password"}}
+        input-validation-error{{end}}" id="password" name="password" value="{{.Password}}">
+    <div class="invalid-feedback">
+        <span id="password-message">{{index .ModelErrors "password"}}</span>
+    </div>
+</div>
+
+<!-- Boolean switch -->
+<div class="mb-3">
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="useTLS" name="useTLS" {{if .UseTLS}}checked{{end}}>
+        <label class="form-check-label" for="useTLS">Use TLS</label>
+    </div>
+</div>
+
+<!-- Text input-->
+<div class="mb-3">
+    <label class="form-label" for="result">Test result</label>
+    <input type="text" class="form-control" id="value" name="value" placeholder="Test result..." value="{{.Result}}" readonly>
+</div>
+
+
+<!-- CSRF token -->
+{{.CsrfField}}
+
+<div class="control">
+    <button id="submitButton" type="submit" class="btn btn-primary">
+        <span class="htmx-indicator">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span class="visually-hidden">Loading...</span>
+        </span>
+        Test
+    </button>
+</div>
+</form>
+{{end}}

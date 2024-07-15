@@ -1,0 +1,45 @@
+{{define "dns-form"}}
+<form hx-post="/dns" hx-swap="outerHTML" class="form-horizontal needs-validation"
+_="on htmx:beforeSend set #submitButton.disabled to 'disabled'">
+
+<!-- Text input-->
+<div class="mb-3">
+    <label class="form-label" for="type">Type</label>
+    <input type="text" class="form-control{{if index .ModelErrors "type"}}
+        input-validation-error{{end}}" id="type" name="type" placeholder="A" value="{{.Type}}">
+    <div class="invalid-feedback">
+        <span id="type-message">{{index .ModelErrors "type"}}</span>
+    </div>
+</div>
+
+<!-- Text input-->
+<div class="mb-3">
+    <label class="form-label" for="value">Value</label>
+    <input type="text" class="form-control{{if index .ModelErrors "value"}}
+        input-validation-error{{end}}" id="value" name="value" placeholder="portal.azure.com" value="{{.Value}}">
+    <div class="invalid-feedback">
+        <span id="value-message">{{index .ModelErrors "value"}}</span>
+    </div>
+</div>
+
+<!-- Text input-->
+<div class="mb-3">
+    <label class="form-label" for="result">Test result</label>
+    <textarea class="form-control" id="result" name="result" rows="8" readonly>{{.Result}}</textarea>
+</div>
+
+
+<!-- CSRF token -->
+{{.CsrfField}}
+
+<div class="control">
+    <button id="submitButton" type="submit" class="btn btn-primary">
+        <span class="htmx-indicator">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span class="visually-hidden">Loading...</span>
+        </span>
+        Test
+    </button>
+</div>
+</form>
+{{end}}
