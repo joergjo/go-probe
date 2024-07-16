@@ -5,7 +5,7 @@
 Quick and somewhat dirty Go web application to test DNS entries, ping PostgreSQL servers and chat with your Azure OpenAI endpoints.
 
 ## OS support
-go-probe currently supports running macOS and Linux. It has not been tested on Windows yet.
+go-probe currently supports running on macOS and Linux. It has not been tested on Windows yet.
 
 ## Configuration options
 go-probe can be configured by exporting the following environment variables:
@@ -38,4 +38,4 @@ Now open http://localhost:8080 on your browser.
 
 ## Warning
 :fire: :fire: :fire: 
-_Do not_ expose go-probe over HTTP only publicly. Some of its tests require you to enter sensitive information which you should provide if the app is exposed over HTTPS!
+_Do not_ expose go-probe over HTTP publicly. Some of its tests require you to enter sensitive information, so do use HTTPS through a reverse proxy, an ingress controller or a PaaS provided ingress like Azure App Services or Azure Container Apps offer!
