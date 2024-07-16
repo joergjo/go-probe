@@ -16,7 +16,7 @@ _="on htmx:beforeSend set #submitButton.disabled to 'disabled'">
 <div class="mb-3">
     <label class="form-label" for="login">Login</label>
     <input type="text" class="form-control{{if index .ModelErrors "login"}}
-        input-validation-error{{end}}" id="login" name="login" placeholder="postgres" value="{{.Login}}">
+        input-validation-error{{end}}" id="login" name="login" placeholder="flexadmin" value="{{.Login}}">
     <div class="invalid-feedback">
         <span id="login-message">{{index .ModelErrors "login"}}</span>
     </div>
