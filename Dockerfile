@@ -1,3 +1,7 @@
+# For a true multi-platform build, you can use the following: 
+# FROM --platform=$BUILDPLATFORM golang:1.22 AS builder
+# This isn't supported by Azure Container Registry's build service, 
+# so we'll use Docker's default behavior.
 FROM golang:1.22 AS builder
 WORKDIR /build
 
